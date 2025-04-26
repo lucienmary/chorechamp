@@ -1,0 +1,9 @@
+<div *ngFor="let taskDone of tasksDone$ | async" class="border-bottom d-flex justify-content-between align-items-center py-2">
+  <div>
+    <b>{{ (taskDone.label.length>30)? (taskDone.label | slice:0:30)+'...':(taskDone.label) }}</b> – par {{ taskDone.doneBy }} – {{ taskDone.score }} pts
+  </div>
+
+  <button class="btn btn-sm btn-outline-danger" title="Marquer comme fait" (click)="  taskStatus(taskDone, false)">
+    <i class="fas fa-close"></i>
+  </button>
+</div>

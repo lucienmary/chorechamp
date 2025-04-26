@@ -1,0 +1,91 @@
+{
+  "participants": [
+    {
+      "id": "0",
+      "name": "Lulu",
+      "avatar": "https://placehold.co/40x40",
+      "assignedTasks": [
+        1,
+        3
+      ],
+      "completedTasks": [
+        1,
+        5
+      ],
+      "score": 8,
+      "nbOfVictories": 2
+    },
+    {
+      "id": "1",
+      "name": "Soso",
+      "avatar": "https://placehold.co/40x40",
+      "assignedTasks": [
+        2,
+        4
+      ],
+      "completedTasks": [
+        2
+      ],
+      "score": 10,
+      "nbOfVictories": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "label": "Sortir les poubelles",
+      "score": 2,
+      "assignedTo": "0",
+      "doneBy": "",
+      "done": false
+    },
+    {
+      "id": "2",
+      "label": "Faire la vaisselle",
+      "score": 1,
+      "assignedTo": "1",
+      "doneBy": "",
+      "done": false
+    },
+    {
+      "id": "3",
+      "label": "Passer l'aspirateur",
+      "score": 3,
+      "assignedTo": "0",
+      "doneBy": "",
+      "done": false
+    },
+    {
+      "id": "4",
+      "label": "Ranger la chambre",
+      "score": 2,
+      "assignedTo": "1",
+      "doneBy": "",
+      "done": false
+    },
+    {
+      "id": "5",
+      "label": "Nettoyer la salle de bain",
+      "score": 4,
+      "assignedTo": "0",
+      "doneBy": "",
+      "done": false
+    },
+    {
+      "id": "6",
+      "label": "Faire les courses",
+      "score": 5,
+      "assignedTo": "",
+      "doneBy": "",
+      "done": false
+    },
+    {
+      "id": "7",
+      "label": "Arroser les plantes",
+      "score": 1,
+      "assignedTo": "0",
+      "doneBy": "",
+      "done": false
+    }
+  ]
+}

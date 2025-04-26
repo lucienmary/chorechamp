@@ -1,0 +1,39 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "label": "Sortir les poubelles",
+      "score": 2,
+      "assignedTo": "0",
+      "done": false
+    },
+    {
+      "id": 2,
+      "label": "Passer l'aspirateur",
+      "score": 3,
+      "assignedTo": "1",
+      "done": true
+    },
+    {
+      "id": 3,
+      "label": "Faire la vaisselle",
+      "score": 1,
+      "assignedTo": "0",
+      "done": false
+    },
+    {
+      "id": 4,
+      "label": "Ranger la chambre",
+      "score": 2,
+      "assignedTo": "1",
+      "done": false
+    },
+    {
+      "id": 5,
+      "label": "Nettoyer les toilettes",
+      "score": 3,
+      "assignedTo": "0",
+      "done": true
+    }
+  ]
+}

@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+
+$font-sizes: map-merge(
+  (
+    7: 0.75rem
+  ),
+  $font-sizes
+);
+
+$enable-cssgrid: true;
+
+@import "bootstrap/scss/bootstrap";
+
+:root {
+  --app-width: 500px;
+}
+
+html {
+  margin-top: 1vh;
+  background: #222222;
+}
+
+body {
+  max-width: var(--app-width);
+  margin: 0 auto;
+  height: 98vh;
+  border-radius: 12px;
+}
+
+app-home {
+  display: block;
+  padding: 12px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.no-arrow {
+  &:after {
+    display: none;
+  }
+}

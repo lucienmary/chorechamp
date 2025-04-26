@@ -1,0 +1,8 @@
+<h1>Utilisateurs&nbsp;:</h1>
+
+<div *ngFor="let participant of participants$ | async">
+  <button (click)="onSelect(participant.id)">
+    <img [src]="participant.avatar" alt="Avatar de l'utilisateur" class="rounded-pill">
+    <p>{{participant.name}}</p>
+  </button>
+</div>
