@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 export type Participant = {
   id: string;
@@ -56,10 +56,30 @@ export class ParticipantsService {
 
   /** ID utilisateur actif stocké dans localStorage */
   setActiveUser(id: string): void {
-    localStorage.setItem(this.ACTIVE_KEY, id);
+    localStorage.setItem(this.ACTIVE_KEY, id.toString());
   }
 
-  getActiveUser(): string | null {
-    return localStorage.getItem(this.ACTIVE_KEY);
+  getActiveUser(): string {
+    return localStorage.getItem(this.ACTIVE_KEY) || '';
+  }
+
+  addScore(id: string, pointsToAdd: number = 1): Observable<Participant> {
+    return this.get(id).pipe(
+      switchMap(participant => {
+        const updatedScore = Number(participant.score) + pointsToAdd;
+        return this.http.patch<Participant>(`${this.API}/${id}`, { score: updatedScore.toString() });
+      }),
+      tap(() => this.fetchAll())
+    );
+  }
+
+  removeScore(id: string, pointsToAdd: number = 1): Observable<Participant> {
+    return this.get(id).pipe(
+      switchMap(participant => {
+        const updatedScore = Number(participant.score) - pointsToAdd;
+        return this.http.patch<Participant>(`${this.API}/${id}`, { score: updatedScore.toString() });
+      }),
+      tap(() => this.fetchAll())
+    );
   }
 }

@@ -1,9 +1,14 @@
-<div *ngFor="let taskDone of tasksDone$ | async" class="border-bottom d-flex justify-content-between align-items-center py-2">
-  <div>
-    <b>{{ (taskDone.label.length>30)? (taskDone.label | slice:0:30)+'...':(taskDone.label) }}</b> – par {{ taskDone.doneBy }} – {{ taskDone.score }} pts
-  </div>
+<div *ngIf="participants$ | async as participants">
+  <div *ngIf="tasksDone$ | async as tasksDone">
+    <p class="text-muted text-center" *ngIf="tasksDone.length === 0">Vous n'avez encore rien fait&nbsp;!</p>
+    <div *ngFor="let taskDone of tasksDone" class="border-bottom d-flex justify-content-between align-items-center py-2">
+      <div>
+        <b>{{ (taskDone.label.length>30)? (taskDone.label | slice:0:30)+'...':(taskDone.label) }}</b> – par <span [innerHTML]="getUserWhoMade(participants, taskDone.doneBy)"></span> – {{ taskDone.score }} pts
+      </div>
 
-  <button class="btn btn-sm btn-outline-danger" title="Marquer comme fait" (click)="  taskStatus(taskDone, false)">
-    <i class="fas fa-close"></i>
-  </button>
+      <button class="btn btn-sm btn-outline-danger" title="Marquer comme encore à faire" (click)="  taskStatus(taskDone, false)">
+        <i class="fas fa-close"></i>
+      </button>
+    </div>
+  </div>
 </div>

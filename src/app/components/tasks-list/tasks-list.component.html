@@ -1,22 +1,24 @@
 <div *ngIf="participants$ | async as participants">
-  <div *ngFor="let task of tasks$ | async" class="border-bottom d-flex justify-content-between align-items-center py-2">
-    <p class="m-0">
-      <b>{{ (task.label.length>30)? (task.label | slice:0:30)+'...':(task.label) }}</b> – {{ task.score }} pts
-      <span [innerHTML]="getParticipantSpan(participants, task.assignedTo)"></span>
-    </p>
+  <div *ngIf="tasks$ | async as tasks">
+    <p class="text-muted text-center" *ngIf="tasks.length === 0">Vous n'avez plus rien à faire&nbsp;! Bravo&nbsp;!</p>
+    <div *ngFor="let task of tasks" class="border-bottom d-flex justify-content-between align-items-center py-2">
+      <p class="m-0">
+        <b>{{ (task.label.length>30)? (task.label | slice:0:30)+'...':(task.label) }}</b> – {{ task.score }} pts
+        <span [innerHTML]="getParticipantSpan(participants, task.assignedTo)"></span>
+      </p>
 
-    <div class="d-flex gap-2">
-      <button class="btn btn-sm btn-outline-danger" title="Supprimer">
-        <i class="fas fa-trash"></i>
-      </button>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+          <i class="fas fa-trash"></i>
+        </button>
 
-      <button class="btn btn-sm btn-outline-warning" title="Modifier">
-        <i class="fas fa-pen"></i>
-      </button>
+        <button class="btn btn-sm btn-outline-warning" title="Modifier">
+          <i class="fas fa-pen"></i>
+        </button>
 
-      <button class="btn btn-sm btn-outline-success" title="Marquer comme fait" (click)="taskStatus(task, true)">
-        <i class="fas fa-check"></i>
-      </button>
+        <button class="btn btn-sm btn-outline-success" title="Marquer comme fait" (click)="taskStatus(task, true)">
+          <i class="fas fa-check"></i>
+        </button>
+      </div>
     </div>
-  </div>
 </div>

@@ -14,5 +14,9 @@ export class WeeklyPointsComponent {
 
   constructor(private participantService: ParticipantsService) {
     this.participants$ = this.participantService.participants$;
+
+    this.participants$.subscribe({
+      next: v => console.log(v)
+    });
   }
 }

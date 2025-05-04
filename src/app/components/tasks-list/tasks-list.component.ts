@@ -14,10 +14,7 @@ export class TasksListComponent {
   tasks$!: Observable<Task[]>;
   participants$: Observable<Participant[]>;
 
-  constructor(
-    private tasksService: TasksService,
-    private participantService: ParticipantsService
-  ) {
+  constructor(private tasksService: TasksService, private participantService: ParticipantsService) {
     this.tasks$ = this.tasksService.tasks$.pipe(
       map(tasks => tasks.filter(task => !task.done))
     );
@@ -25,8 +22,8 @@ export class TasksListComponent {
     this.participants$ = this.participantService.participants$;
   }
 
-  getParticipantSpan(participants: Participant[], assignedTo: string): string {
-    const participant = participants.find(p => p.id === assignedTo);
+  getParticipantSpan(participants: Participant[], assignedTo: number): string {
+    const participant = participants.find(p => p.id === assignedTo.toString());
     return participant ? `<span class="text-muted fs-7">– (${participant.name})</span>` : '';
   }
 

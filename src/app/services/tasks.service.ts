@@ -1,4 +1,4 @@
-import { Participant, ParticipantsService } from './participants.service';
+import { ParticipantsService } from './participants.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
@@ -7,8 +7,8 @@ export type Task = {
   id: number;
   label: string;
   score: number;
-  assignedTo: string;
-  doneBy: string | null;
+  assignedTo: number;
+  doneBy: number | undefined;
   done: boolean;
 };
 
@@ -44,13 +44,20 @@ export class TasksService {
   }
 
   taskStatus(task: Task, bool: boolean): void {
-    let doneBy:string | null = '';
-    if(bool == true) {
-      doneBy = this.participantService.getActiveUser();
-    }
-    const updatedTask = { ...task, done: bool, doneBy: doneBy };
+    var activeUser: string | undefined = this.participantService.getActiveUser();
+    var hotfix_activeUser: any; // Fix for json-server (doesn't like undefined for doneBy).
 
-    this.update(task.id, { done: bool }).subscribe({
+    if(bool == true) {
+      this.participantService.addScore(activeUser, task.score);
+      hotfix_activeUser = activeUser;
+    }else {
+      this.participantService.removeScore(activeUser, task.score);
+      hotfix_activeUser = "";
+    }
+
+    const updatedTask = { ...task, done: bool, doneBy: hotfix_activeUser };
+
+    this.update(task.id, { done: bool, doneBy: hotfix_activeUser }).subscribe({
       next: () => {
         const tasks = this.tasksSubject.getValue();
         const updatedTasks = tasks.map(t => t.id === task.id ? updatedTask : t);

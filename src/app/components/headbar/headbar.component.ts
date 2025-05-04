@@ -13,19 +13,21 @@ import { Router } from '@angular/router';
 export class HeadbarComponent {
   @Input() title!: string;
   participants$: Observable<Participant[]>;
-  activeUserId!: string | null;
+  activeUserId!: string | undefined;
   activeUser$!: Observable<Participant>;
 
   constructor(private participantService: ParticipantsService, private router: Router) {
     this.participants$ = this.participantService.participants$;
     this.activeUserId = this.participantService.getActiveUser();
+
     if (typeof this.activeUserId == 'string')
       this.activeUser$ = this.participantService.get(this.activeUserId);
   }
 
   ngOnInit(): void {
-    if (!this.activeUserId)
+    if (!this.activeUser$)
       this.router.navigate(['/participants']).catch(err => console.error(err));
+
   }
 
   DropdownChangeUser(): void  {
